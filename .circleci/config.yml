@@ -1,0 +1,13 @@
+jobs:
+  build:
+    docker:
+      - image: cimg/openjdk:24.0.2
+    steps:
+      - checkout
+      - run: java --version
+      - run: 
+          name: sed mvnw
+          command: sed -i -e 's/\r$//' mvnw && chmod +x mvnw
+      - run:
+          name: Build project
+          command: ./mvnw clean package
